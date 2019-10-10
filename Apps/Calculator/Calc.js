@@ -17,26 +17,38 @@ const styles = StyleSheet.create({
 class Calc extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { result: '', equation: '' }
+		this.state = { equation: '', result: '' }
 
 		this.numeric = [7, 8, 9, 4, 5, 6, 1, 2, 3, '.', 0, '=']
 		this.special = ['C', '/', '*', '-', '+']
 		this.buttonhandler = this.buttonhandler.bind(this)
 	}
 
+	eval(equation) {
+		try {
+			return eval(equation)
+		} catch {
+			return null
+		}
+	}
+
 	buttonhandler(data) {
 		console.log('received press', data)
-		if (!isNaN(data)) {
+		if (data === 'C') {
 			this.setState({
-				equation: this.state.equation + data,
+				equation: this.state.equation.slice(0, -1),
+				result: this.eval(this.state.equation.slice(0, -1)),
+			})
+		} else if (data === '=') {
+			this.setState({
+				equation: this.state.result,
+				result: '',
 			})
 		} else {
-			switch (data) {
-				case 'C':
-					this.setState({
-						equation: this.state.equation.slice(0, -1),
-					})
-			}
+			this.setState({
+				equation: this.state.equation + data,
+				result: this.eval(this.state.equation + data),
+			})
 		}
 	}
 
