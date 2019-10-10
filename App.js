@@ -7,7 +7,8 @@ import App04 from './Apps/App04'
 import App05 from './Apps/App05'
 import App06 from './Apps/App06'
 import App07 from './Apps/App07'
+import Calc from './Apps/Calculator/Calc'
 
 export default function App() {
-	return <App07 />
+	return <Calc />
 }
