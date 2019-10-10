@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 class Calc extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { equation: '', result: '' }
+		this.state = { equation: '0', result: '' }
 
 		this.numeric = [7, 8, 9, 4, 5, 6, 1, 2, 3, '.', 0, '=']
 		this.special = ['C', '/', '*', '-', '+']
@@ -25,6 +25,7 @@ class Calc extends Component {
 	}
 
 	eval(equation) {
+		if (!isNaN(equation)) return null
 		try {
 			return eval(equation)
 		} catch {
@@ -34,20 +35,37 @@ class Calc extends Component {
 
 	buttonhandler(data) {
 		console.log('received press', data)
+		console.log(typeof this.state.equation)
+		console.log(this.state.equation.length)
 		if (data === 'C') {
+			let temp = this.state.equation.slice(0, -1)
+			if (temp.length === 0) {
+				temp = '0'
+			}
 			this.setState({
-				equation: this.state.equation.slice(0, -1),
-				result: this.eval(this.state.equation.slice(0, -1)),
+				equation: `${temp}`,
+				result: this.eval(temp),
 			})
 		} else if (data === '=') {
-			this.setState({
-				equation: this.state.result,
-				result: '',
-			})
+			if (this.state.result) {
+				this.setState({
+					equation: `${this.state.result}`,
+					result: '',
+				})
+			} else {
+				this.setState({
+					equation: '0',
+					result: '',
+				})
+			}
 		} else {
+			let temp = this.state.equation + data
+			if (this.state.equation === '0' && !isNaN(data)) {
+				temp = data
+			}
 			this.setState({
-				equation: this.state.equation + data,
-				result: this.eval(this.state.equation + data),
+				equation: `${temp}`,
+				result: this.eval(temp),
 			})
 		}
 	}
@@ -57,10 +75,14 @@ class Calc extends Component {
 			<View style={styles.wrapper}>
 				<View style={styles.display}>
 					<View style={styles.equation}>
-						<Text style={styles.equationText}>{this.state.equation}</Text>
+						<Text numberOfLines={1} style={styles.equationText}>
+							{this.state.equation}
+						</Text>
 					</View>
 					<View style={styles.result}>
-						<Text style={styles.resultText}>{this.state.result}</Text>
+						<Text numberOfLines={1} style={styles.resultText}>
+							{this.state.result}
+						</Text>
 					</View>
 				</View>
 				<View style={styles.keyboard}>
