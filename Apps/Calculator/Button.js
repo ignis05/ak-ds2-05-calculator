@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { TouchableOpacity, Text, StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-	button: { width: '33%', height: '25%', alignItems: 'center', justifyContent: 'center' },
+	button: { alignItems: 'center', justifyContent: 'center' },
 })
 
 class Button extends Component {
@@ -18,7 +18,7 @@ class Button extends Component {
 
 	render() {
 		return (
-			<TouchableOpacity onPress={this.presshandler} style={styles.button}>
+			<TouchableOpacity onPress={this.presshandler} style={[styles.button, { width: this.props.width, height: this.props.height }]}>
 				<Text style={{ color: 'white', fontSize: 48 }}>{this.props.text}</Text>
 			</TouchableOpacity>
 		)
