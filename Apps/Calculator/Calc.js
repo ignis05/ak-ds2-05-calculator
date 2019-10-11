@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
 import Button from './Button'
+import img from './img/2137.png'
 
 const styles = StyleSheet.create({
 	wrapper: { flex: 1, backgroundColor: '#121212', color: 'white', paddingTop: 30 },
@@ -81,7 +82,7 @@ class Calc extends Component {
 					</View>
 					<View style={styles.result}>
 						<Text numberOfLines={1} style={styles.resultText}>
-							{this.state.result}
+							{this.state.equation === '2137' ? <Image style={{ height: 35, width: 35 }} resizeMode="contain" source={img} /> : this.state.result}
 						</Text>
 					</View>
 				</View>
