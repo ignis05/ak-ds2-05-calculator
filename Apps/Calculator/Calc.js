@@ -5,10 +5,10 @@ import Button from './Button'
 const styles = StyleSheet.create({
 	wrapper: { flex: 1, backgroundColor: '#121212', color: 'white', paddingTop: 30 },
 	display: { flex: 1, color: 'white', backgroundColor: '#ffffff15', borderRadius: 20, margin: 10 },
-	equation: { paddingRight: 20, alignItems: 'flex-end', justifyContent: 'space-around', flex: 1 },
-	result: { paddingRight: 20, alignItems: 'flex-end', justifyContent: 'space-around', flex: 1, color: 'white' },
+	equation: { paddingRight: 20, paddingLeft: 20, alignItems: 'flex-end', justifyContent: 'space-around', flex: 1 },
+	result: { paddingRight: 20, paddingLeft: 20, alignItems: 'flex-end', justifyContent: 'space-around', flex: 1, color: 'white' },
 	equationText: { color: 'white', fontSize: 80 },
-	resultText: { color: 'white', fontSize: 48 },
+	resultText: { color: '#ffffff55', fontSize: 48 },
 	keyboard: { flex: 2, backgroundColor: '#ffffff15', borderRadius: 20, margin: 10, flexDirection: 'row' },
 	numeric: { flexDirection: 'row', flexWrap: 'wrap', flex: 3, backgroundColor: '#ffffff15', borderTopLeftRadius: 20, borderBottomLeftRadius: 20 },
 	special: { flex: 1, backgroundColor: '#ffffff20', borderTopRightRadius: 20, borderBottomRightRadius: 20 },
@@ -88,12 +88,16 @@ class Calc extends Component {
 				<View style={styles.keyboard}>
 					<View style={styles.numeric}>
 						{this.numeric.map(val => (
-							<Button key={val} text={val} callback={this.buttonhandler} width="33%" height="25%" />
+							<Button key={val} callback={this.buttonhandler} width="33%" height="25%">
+								{val}
+							</Button>
 						))}
 					</View>
 					<View style={styles.special}>
 						{this.special.map(val => (
-							<Button key={val} text={val} callback={this.buttonhandler} width="100%" height="20%" />
+							<Button key={val} callback={this.buttonhandler} width="100%" height="20%">
+								{val}
+							</Button>
 						))}
 					</View>
 				</View>
