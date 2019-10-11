@@ -19,7 +19,7 @@ class Button extends Component {
 	render() {
 		return (
 			<TouchableOpacity onPress={this.presshandler} style={[styles.button, { width: this.props.width, height: this.props.height }]}>
-				<Text style={{ color: 'white', fontSize: 48 }}>{this.props.children}</Text>
+				<Text style={{ color: this.props.color || 'white', fontSize: 48 }}>{this.props.children}</Text>
 			</TouchableOpacity>
 		)
 	}
