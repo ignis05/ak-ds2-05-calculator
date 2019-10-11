@@ -36,8 +36,6 @@ class Calc extends Component {
 
 	buttonhandler(data) {
 		console.log('received press', data)
-		console.log(typeof this.state.equation)
-		console.log(this.state.equation.length)
 		if (data === 'C') {
 			let temp = this.state.equation.slice(0, -1)
 			if (temp.length === 0) {
@@ -72,6 +70,8 @@ class Calc extends Component {
 	}
 
 	render() {
+		console.log(this.state.equation)
+		console.log(this.state.result)
 		return (
 			<View style={styles.wrapper}>
 				<View style={styles.display}>
